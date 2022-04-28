@@ -49,3 +49,10 @@ Epoch: [0][    4/13334]	Time  0.275 ( 1.785)	Data  0.108 ( 0.334)	Loss 9.6760e+0
 python test_case_for_multi_gpu.py -b 384
 ```
 
+如果在docker中启动，使用下列命令：
+
+```bash
+docker run -ti --rm --ipc=host --volume /var/drivers/nvidia/current:/usr/local/nvidia:ro --device=/dev/nvidiactl --device=/dev/nvidia-uvm --device=/dev/nvidia4 --device=/dev/nvidia5 --device=/dev/nvidia6 --device=/dev/nvidia7 10.11.3.8:5000/bitahub/deepo:py38_cu113 bash -c "wget https://git.openi.org.cn/xwzheng/GPUCluster/raw/branch/master/test_cases/test_case_for_multi_gpu.py; python test_case_for_multi_gpu.py -b 384"
+```
+
+在上面的命令中，使用了第`4, 5, 6, 7`号GPU（可根据具体情形更改为其他号），镜像为`10.11.3.8:5000/bitahub/deepo:py38_cu113`，因使用了4张卡，batch_size更改为384。
